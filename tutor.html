@@ -1,0 +1,559 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AB1501 Marketing Wheel Tutor Key</title>
+<style>body{margin:0}img{max-width:100%}</style>
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&family=Archivo+Black&family=Bowlby+One&display=swap">
+<style>
+/* Layout: game-show stage. Wheel on the left, marquee-lit puzzle board on the right, five team podiums along the bottom. Single dark theme by design. */
+:root{
+  color-scheme: dark;
+  --stage:#0b1530; --stage-2:#14244c; --line:#2a3d6e;
+  --board:#16614f; --board-edge:#0e4537; --tile:#f5f1e3; --tile-ink:#0d1426;
+  --bulb:#ffd25a; --hot:#ef4b5f; --text:#eef1fa; --muted:#9fb0d6;
+  --seg1:#ffd25a; --seg2:#ef4b5f; --seg3:#2ec4b6; --seg4:#5b7cfa; --seg5:#ff8f3d; --seg6:#9b6bff;
+  --f-display:"Bowlby One","Archivo Black",Impact,sans-serif;
+  --f-tile:"Archivo Black","Arial Black",sans-serif;
+  --f-body:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+[hidden]{display:none!important}
+html,body{min-height:100%}
+body{background:radial-gradient(120% 80% at 50% 0%,var(--stage-2),var(--stage) 60%);background-color:var(--stage);color:var(--text);font-family:var(--f-body);font-size:15px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:16px 28px}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible{outline:3px solid var(--bulb);outline-offset:2px}
+.wrap{max-width:1320px;margin:0 auto;display:grid;gap:18px}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+h1{font-family:var(--f-display);font-weight:400;font-size:clamp(22px,3vw,34px);letter-spacing:.02em;margin:0;text-wrap:balance}
+h1 span{color:var(--bulb)}
+.sub{color:var(--muted);font-size:13px;margin-top:2px}
+.tools{display:flex;gap:8px;flex-wrap:wrap}
+.chip-btn{background:transparent;border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:13px;font-weight:600}
+.chip-btn:hover{border-color:var(--muted)}
+
+.stage{display:grid;grid-template-columns:minmax(300px,0.85fr) 1.4fr;gap:22px;align-items:start}
+@media (max-width:900px){.stage{grid-template-columns:1fr}}
+
+/* wheel */
+.wheel-col{display:grid;gap:14px;justify-items:center;min-width:0}
+.wheel-box{position:relative;width:min(100%,460px);aspect-ratio:1;max-width:100%}
+.wheel-box canvas{width:100%;height:100%;display:block;border-radius:50%;box-shadow:0 0 0 8px #0a1026,0 0 0 12px var(--bulb),0 18px 50px rgba(0,0,0,.55);transform:rotate(0deg)}
+.pointer{position:absolute;top:-14px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:18px solid transparent;border-right:18px solid transparent;border-top:34px solid var(--text);filter:drop-shadow(0 3px 3px rgba(0,0,0,.5));z-index:2}
+.hub{position:absolute;inset:50% auto auto 50%;transform:translate(-50%,-50%);width:16%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff6cf,var(--bulb) 55%,#b98a10);box-shadow:0 2px 10px rgba(0,0,0,.5);display:grid;place-items:center;font-family:var(--f-display);font-size:clamp(10px,1.4vw,14px);color:var(--tile-ink);border:none}
+.spin-btn{font-family:var(--f-display);font-size:22px;letter-spacing:.06em;background:var(--bulb);color:var(--tile-ink);border:none;border-radius:14px;padding:12px 44px;box-shadow:0 5px 0 #b98a10}
+.spin-btn:active{transform:translateY(3px);box-shadow:0 2px 0 #b98a10}
+.spin-btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.status{min-height:52px;text-align:center;font-size:17px;font-weight:600;max-width:460px;text-wrap:balance}
+.status b{color:var(--bulb)}
+.status .bad{color:var(--hot)}
+
+/* board */
+.board-col{display:grid;gap:14px;min-width:0}
+.catbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.cat{font-family:var(--f-display);font-size:clamp(16px,2vw,22px);letter-spacing:.05em;background:var(--hot);padding:6px 18px;border-radius:8px;text-transform:uppercase}
+.src{color:var(--muted);font-size:13px}
+.marquee{position:relative;padding:18px;border-radius:18px;background:#0a1026;
+  background-image:radial-gradient(circle,var(--bulb) 3px,transparent 4px);background-size:22px 22px;background-position:center}
+.marquee::before{content:"";position:absolute;inset:9px;border-radius:12px;background:#0a1026}
+.board{position:relative;display:grid;grid-template-columns:repeat(14,1fr);gap:4px;background:var(--board-edge);padding:8px;border-radius:8px}
+.cell{aspect-ratio:3/4;border-radius:3px;background:var(--board);display:grid;place-items:center;font-family:var(--f-tile);font-size:clamp(12px,2.3vw,34px);line-height:1;color:var(--tile-ink)}
+.cell.letter{background:var(--tile)}
+.cell.letter span{opacity:0}
+.cell.letter.on span{opacity:1}
+.cell.letter.flash{background:#7fb3ff;animation:flash .7s ease}
+@keyframes flash{0%{background:#7fb3ff}100%{background:var(--tile)}}
+.hint{background:var(--stage-2);border:1px dashed var(--line);border-radius:10px;padding:10px 14px;color:var(--text);font-size:15px}
+.hint[hidden]{display:none}
+
+.keys{display:grid;grid-template-columns:repeat(13,1fr);gap:5px}
+@media (max-width:560px){.keys{grid-template-columns:repeat(7,1fr)}}
+.key{border:none;border-radius:7px;padding:9px 0;font-family:var(--f-tile);font-size:clamp(14px,1.6vw,19px);background:#e7ebf6;color:var(--tile-ink);display:grid;justify-items:center;gap:1px}
+.key small{font-family:var(--f-body);font-size:10px;font-weight:600;color:#47587e}
+.key.vowel{background:#cfe5ff}
+.key:disabled{opacity:.18;cursor:not-allowed}
+.key.hit{background:var(--seg3);opacity:.45}
+.key.miss{background:var(--hot);opacity:.35}
+
+.actions{display:flex;gap:10px;flex-wrap:wrap}
+.btn{border:1px solid var(--line);background:var(--stage-2);border-radius:10px;padding:10px 16px;font-weight:700}
+.btn:hover{border-color:var(--muted)}
+.btn.solve{background:var(--seg3);border-color:var(--seg3);color:var(--tile-ink)}
+.btn.warn{color:var(--hot)}
+
+/* teams */
+.teams{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+@media (max-width:760px){.teams{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.team{position:relative;border:2px solid var(--line);border-radius:14px;padding:12px 12px 10px;background:linear-gradient(180deg,var(--stage-2),#0d1838);text-align:left;display:grid;gap:4px;min-width:0}
+.team.cur{border-color:var(--bulb);box-shadow:0 0 0 3px rgba(255,210,90,.25),0 0 28px rgba(255,210,90,.18)}
+.team .nm{font-weight:800;font-size:14px;overflow-wrap:anywhere}
+.team .tot{font-family:var(--f-display);font-size:clamp(22px,2.6vw,32px);font-variant-numeric:tabular-nums;line-height:1.05}
+.team .rnd{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.team .rnd b{color:var(--text)}
+.team .tag{position:absolute;top:-11px;right:10px;background:var(--bulb);color:var(--tile-ink);font-size:11px;font-weight:800;letter-spacing:.06em;padding:2px 8px;border-radius:6px;text-transform:uppercase}
+
+/* overlay */
+.overlay{position:fixed;inset:0;background:rgba(5,10,25,.72);display:grid;place-items:center;padding:20px max(16px,env(safe-area-inset-left,0px));z-index:20}
+.dialog{background:var(--stage-2);border:2px solid var(--bulb);border-radius:16px;padding:22px;max-width:520px;width:100%;display:grid;gap:14px}
+.dialog h2{font-family:var(--f-display);font-weight:400;margin:0;font-size:24px;text-wrap:balance}
+.dialog p{margin:0;color:var(--text);line-height:1.5}
+.dialog .muted{color:var(--muted);font-size:14px}
+.dialog .row{display:flex;gap:10px;flex-wrap:wrap}
+
+/* host drawer */
+details.host{border:1px solid var(--line);border-radius:12px;padding:10px 14px;background:rgba(20,36,76,.5)}
+details.host summary{cursor:pointer;font-weight:700}
+.host-grid{display:grid;gap:14px;margin-top:12px}
+.host-teams{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.host-team{display:flex;gap:6px;align-items:center;min-width:0}
+.host-team input{flex:1;min-width:0;background:#0a1026;border:1px solid var(--line);border-radius:8px;color:var(--text);padding:7px 9px;font:inherit}
+.mini{border:1px solid var(--line);background:#0a1026;border-radius:7px;padding:6px 8px;font-size:12px;font-weight:700}
+.cats{display:flex;gap:8px;flex-wrap:wrap}
+.cats label{display:flex;gap:6px;align-items:center;font-size:13px;border:1px solid var(--line);border-radius:999px;padding:5px 11px;cursor:pointer}
+.rules{color:var(--muted);font-size:13px;line-height:1.55;max-width:75ch;margin:0;padding-left:18px}
+@media (prefers-reduced-motion:reduce){.cell.letter.flash{animation:none}}
+.key-view{max-width:760px;margin:0 auto;display:grid;gap:14px}
+.key-view .live{background:var(--bulb);color:var(--tile-ink);border-radius:10px;padding:10px 14px;font-weight:800}
+.key-list{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.key-list li{display:grid;grid-template-columns:48px 1fr;gap:12px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--stage-2)}
+.key-list li.now{border-color:var(--bulb);box-shadow:0 0 0 3px rgba(255,210,90,.25)}
+.key-list .n{font-family:var(--f-display);font-size:24px;color:var(--bulb);text-align:center;font-variant-numeric:tabular-nums}
+.key-list .a{font-family:var(--f-tile);font-size:16px;letter-spacing:.03em;overflow-wrap:anywhere}
+.key-list .d{font-size:14px;line-height:1.45;margin-top:4px}
+.key-list .m{color:var(--muted);font-size:13px;margin-top:4px}
+.key-list .m b{color:var(--bulb)}
+.key-list li{align-items:start}
+</style>
+
+<div class="key-view" id="keyView" hidden>
+  <header>
+    <div>
+      <h1>Tutor <span>Answer Key</span></h1>
+      <div class="sub">Answer, definition and lecture slide for each puzzle. Match the puzzle number shown above the board. Keep this screen away from the projector.</div>
+    </div>
+    <button class="chip-btn" id="backBtn" type="button">Open the game</button>
+  </header>
+  <div class="live" id="keyLive" hidden></div>
+  <ol class="key-list" id="keyList"></ol>
+</div>
+
+<div class="wrap" id="game">
+  <header>
+    <div>
+      <h1>AB1501 <span>Marketing Wheel</span></h1>
+      <div class="sub">Puzzles drawn from Dr Lim's Lectures 1–12 · Groups 20 &amp; 21 wrap-up</div>
+    </div>
+    <div class="tools">
+      <button class="chip-btn" id="soundBtn" type="button">Sound: on</button>
+      <button class="chip-btn" id="rulesBtn" type="button">Rules</button>
+    </div>
+  </header>
+
+  <section class="stage">
+    <div class="wheel-col">
+      <div class="wheel-box">
+        <div class="pointer" aria-hidden="true"></div>
+        <canvas id="wheel" width="920" height="920" aria-label="Prize wheel"></canvas>
+        <button class="hub" id="hubBtn" type="button" aria-label="Spin the wheel">SPIN</button>
+      </div>
+      <button class="spin-btn" id="spinBtn" type="button">SPIN</button>
+      <div class="status" id="status" aria-live="polite"></div>
+    </div>
+
+    <div class="board-col">
+      <div class="catbar">
+        <div class="cat" id="cat">Category</div>
+        <div class="src" id="src"></div>
+      </div>
+      <div class="marquee"><div class="board" id="board"></div></div>
+      <div class="hint" id="hint" hidden></div>
+      <div class="keys" id="keys"></div>
+      <div class="actions">
+        <button class="btn solve" id="solveBtn" type="button">Solve the puzzle</button>
+        <button class="btn" id="hintBtn" type="button">Show clue</button>
+        <button class="btn" id="passBtn" type="button">Next team</button>
+        <button class="btn" id="newBtn" type="button">New puzzle</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="teams" id="teams" aria-label="Team scores"></section>
+
+  <details class="host">
+    <summary>Host controls</summary>
+    <div class="host-grid">
+      <div class="host-teams" id="hostTeams"></div>
+      <div>
+        <div style="font-weight:700;margin-bottom:8px">Areas to draw puzzles from</div>
+        <div class="cats" id="cats"></div>
+      </div>
+      <div class="actions">
+        <button class="btn" id="keyBtn" type="button">Tutor answer key (open on your phone)</button>
+        <button class="btn" id="revealBtn" type="button">Reveal answer (no points)</button>
+        <button class="btn warn" id="resetBtn" type="button">Reset scores</button>
+      </div>
+    </div>
+  </details>
+</div>
+
+<div class="overlay" id="overlay" hidden>
+  <div class="dialog" id="dialog" role="dialog" aria-modal="true"></div>
+</div>
+
+<script>
+const PUZZLES = [
+  {cat:"Segmentation & Targeting", a:"PSYCHOGRAPHIC SEGMENTATION", hint:"Dividing buyers by lifestyle, personality or social class.", src:"Lecture 1–3 · Ch 5 & 7", def:"Dividing a market into groups based on lifestyle, personality or social class. People in the same demographic group can have very different psychographic profiles.", loc:"Lecture 01 to 03, slides 32–35 · Ch 5 pp. 143–144, Ch 7 p. 198"},
+  {cat:"Segmentation & Targeting", a:"DIFFERENTIATED MARKETING", hint:"Target several segments, with a separate offer for each.", src:"Lecture 1–3 · Ch 7", def:"A targeting strategy where the firm targets several segments and designs a separate offer for each. Also called segmented marketing.", loc:"Lecture 01 to 03, slide 43 (Targeting Strategies) · Ch 7 pp. 205–209"},
+  {cat:"Segmentation & Targeting", a:"SOCIALLY RESPONSIBLE TARGET MARKETING", hint:"Remember the cheap instant-noodle diet example.", src:"Lecture 1–3 · Ch 7 & 20", def:"Targeting that serves the interests of the segment, not just the company. It avoids exploiting vulnerable or disadvantaged consumers with harmful or controversial products.", loc:"Lecture 01 to 03, slides 45–46 · Ch 7 pp. 209–210, Ch 20 pp. 608–613"},
+  {cat:"Positioning & Differentiation", a:"PERCEPTUAL POSITIONING MAP", hint:"Plots how consumers see competing brands on two dimensions.", src:"Lecture 1–3 · Ch 7", def:"A chart showing consumer perceptions of a brand versus competing products on important buying dimensions.", loc:"Lecture 01 to 03, slide 53 · Ch 7 p. 211"},
+  {cat:"Positioning & Differentiation", a:"THE WORLD'S SAFEST CAR", hint:"Volvo's position, and why it capped top speed at 180 km/h.", src:"Lecture 1–3 · Ch 7", def:"Volvo's positioning. Positioning is the 'being' strategy (the place the brand holds in the customer's mind); differentiation is the core tactic that backs it up (safety features, brand integrity).", loc:"Lecture 01 to 03, slides 61–64 · Kotler et al., Rethinking Marketing"},
+  {cat:"Positioning & Differentiation", a:"POSITIONING STATEMENT", hint:"To (target and need), our (brand) is (concept) that (point of difference).", src:"Lecture 1–3 · Ch 7", def:"A statement that sums up the brand's positioning: To (target segment and need) our (brand) is (concept) that (point of difference).", loc:"Lecture 01 to 03, slide 60 · Ch 7 p. 218"},
+  {cat:"Product", a:"AUGMENTED PRODUCT", hint:"Extra services and benefits built around the core and actual product.", src:"Lecture 4 · Ch 8", def:"The third product level: additional services and benefits built around the core customer value and the actual product, e.g. warranty, after-sale service, support.", loc:"Lecture 04, slide 25 · Ch 8 pp. 230–231"},
+  {cat:"Product", a:"STORE BRAND", hint:"FairPrice adding 300 products to its own range.", src:"Lecture 4 · Ch 8", def:"A brand created and owned by a reseller of the product. Also called a private or house brand, e.g. FairPrice house brand.", loc:"Lecture 04, slides 18–19 · Ch 8 pp. 251–253"},
+  {cat:"Product", a:"PACKAGING AND LABELING", hint:"User-friendly, attractive, functional, informative and truthful.", src:"Lecture 4 · Ch 8", def:"Packaging is designing and producing the container or wrapper for a product. Labels range from simple tags to complex graphics; they identify, describe and promote the product.", loc:"Lecture 04, slides 21–24 · Ch 8 pp. 236–237"},
+  {cat:"Price", a:"MARKET SKIMMING PRICING", hint:"Launch high, then lower the price over time.", src:"Lecture 5 · Ch 11", def:"Setting a high initial price for a new product to skim maximum revenue from the segments willing to pay it, then lowering it over time.", loc:"Lecture 05, slides 11–12 · Ch 11 p. 321"},
+  {cat:"Price", a:"CAPTIVE PRODUCT PRICING", hint:"A cheap printer and expensive ink cartridges.", src:"Lecture 5 · Ch 11", def:"Setting a price for products that must be used along with a main product, e.g. printer ink, razor blades, coffee capsules.", loc:"Lecture 05, slide 17 · Ch 11"},
+  {cat:"Price", a:"SHRINKFLATION", hint:"Same price, less in the pack.", src:"Lecture 5 · Ch 11", def:"Companies shrink the product size or quantity while keeping the price the same, so the price per unit rises without a visible price increase.", loc:"Lecture 05, slides 27–28 · Ch 11 pp. 336–337 (buyers' perceptions of price changes)"},
+  {cat:"Price", a:"DYNAMIC PRICING", hint:"Wendy's plan to change prices by time of day.", src:"Lecture 5 · Ch 11", def:"Adjusting prices continually to meet the characteristics and needs of individual customers and situations, e.g. surge pricing based on demand.", loc:"Lecture 05, slides 21–23 · Ch 11"},
+  {cat:"Place", a:"VERTICAL MARKETING SYSTEM", hint:"Producer, wholesaler and retailer acting as one unified system.", src:"Lecture 6 · Ch 12", def:"A channel structure in which producers, wholesalers and retailers act as a unified system. Three types: corporate, contractual and administered.", loc:"Lecture 06, slide 28 · Ch 12 pp. 354–356"},
+  {cat:"Place", a:"EXPERIENTIAL RETAIL", hint:"A free makeover at the beauty bar.", src:"Lecture 6 · Ch 13", def:"Retailing built around the in-store experience (trying, learning, advice) and not only the transaction, e.g. Sephora's beauty bar.", loc:"Lecture 06, slides 19–21 · Ch 13"},
+  {cat:"Place", a:"VALUE DELIVERY NETWORK", hint:"The company, its suppliers, distributors and customers working together.", src:"Lecture 6 · Ch 12", def:"The company, its suppliers, distributors and ultimately customers who partner with each other to improve the performance of the whole system.", loc:"Lecture 06, slide 4 · Ch 12 p. 349"},
+  {cat:"Promotion", a:"INTEGRATED MARKETING COMMUNICATION", hint:"Coordinating every channel so the message stays consistent.", src:"Lecture 7–8 · Ch 14", def:"Carefully integrating and coordinating the company's many communication channels to deliver a clear, consistent and compelling message about the organisation and its products.", loc:"Lecture 07 and 08, slides 7–8 · Ch 14 pp. 424–430"},
+  {cat:"Promotion", a:"CUSTOMER JOURNEY MAP", hint:"An illustrated view of a customer's expectations at each touchpoint.", src:"Lecture 7–8", def:"An illustrated representation of a customer's expectations, experiences and reflections as they unfold over time across multiple stages and touchpoints.", loc:"Lecture 07 and 08, slides 41–43"},
+  {cat:"Promotion", a:"EMOTIONAL APPEAL", hint:"Uses positive or negative feelings, not the benefits sought.", src:"Lecture 7–8 · Ch 14", def:"A message appeal that stirs up positive or negative emotions to motivate purchase. Contrast with rational appeal (desired benefits) and moral appeal (sense of right and proper).", loc:"Lecture 07 and 08, slide 21 · Ch 14 pp. 434–435"},
+  {cat:"Buyer Behaviour", a:"SELECTIVE DISTORTION", hint:"Interpreting information to fit what you already believe.", src:"Lecture 9–10 · Ch 5", def:"The tendency for people to interpret information in a way that supports what they already believe.", loc:"Lecture 09 and 10, slide 23 · Ch 5"},
+  {cat:"Buyer Behaviour", a:"CLASSICAL CONDITIONING", hint:"A stimulus paired often enough produces a learned response.", src:"Lecture 9–10 · Ch 5", def:"Learning that leads to a conditioned response by pairing two stimuli, e.g. a brand repeatedly paired with a pleasant feeling.", loc:"Lecture 09 and 10, slide 27 · Ch 5"},
+  {cat:"Buyer Behaviour", a:"RETURN ON MARKETING INVESTMENT", hint:"Net return from marketing divided by its cost.", src:"Lecture 9–10 · Ch 2", def:"The net return from a marketing investment divided by the cost of that investment. Measured with standard performance measures and customer-centred measures.", loc:"Lecture 09 and 10, slides 57–58 · Ch 2 p. 59"},
+  {cat:"Marketing Research", a:"SPURIOUS CORRELATION", hint:"Two things move together, but neither causes the other.", src:"Lecture 11–12 · Ch 4", def:"Two variables move together but neither causes the other; often a third variable drives both. Causal research must rule this out.", loc:"Lecture 11 and 12, slide 14 · Ch 4 pp. 107–108"},
+  {cat:"Marketing Research", a:"DOUBLE BARRELED QUESTION", hint:"\"This course is informative and fun.\"", src:"Lecture 11–12 · Ch 4", def:"A survey question that asks about two things at once, so the answer cannot be interpreted, e.g. 'This course is informative and fun.'", loc:"Lecture 11 and 12, slide 37 · Ch 4 p. 115"},
+  {cat:"Marketing Research", a:"STRATIFIED RANDOM SAMPLE", hint:"Split the population into groups, then sample randomly from each.", src:"Lecture 11–12 · Ch 4", def:"A probability sample: the population is divided into mutually exclusive groups and random samples are drawn from each group.", loc:"Lecture 11 and 12, slide 30 · Ch 4 p. 115"},
+  {cat:"Marketing Research", a:"CONVENIENCE SAMPLE", hint:"Interview whoever is easiest to reach.", src:"Lecture 11–12 · Ch 4", def:"A nonprobability sample: the researcher selects the easiest population members to obtain information from.", loc:"Lecture 11 and 12, slide 32 · Ch 4 p. 115"}
+];
+const CATS = [...new Set(PUZZLES.map(p=>p.cat))];
+const SEGS = [500,300,"BANKRUPT",600,400,700,"LOSE A TURN",350,800,450,300,900,"BANKRUPT",500,650,400,1000,300,550,"LOSE A TURN",600,750,450,400];
+const SEG_COLORS = ["--seg1","--seg3","--seg4","--seg5","--seg6","--seg2"];
+const VOWELS = "AEIOU", VOWEL_COST = 250, SOLVE_MIN = 1000, EXPLAIN_BONUS = 500;
+const COLS = 14, ROWS = 4;
+
+let S;
+function freshState(){
+  return {
+    teams:[1,2,3,4,5].map(n=>({name:"Team "+n,total:0,round:0})),
+    cur:0, rot:0, landed:null, phase:"spin", used:[], cats:CATS.slice(),
+    puzzle:0, done:[], solved:false, hint:false, sound:true, msg:""
+  };
+}
+
+const $ = id=>document.getElementById(id);
+const css = n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+
+/* ---------- audio ---------- */
+let AC=null;
+function tone(freq,dur,type="sine",vol=.15,delay=0){
+  if(!S.sound) return;
+  try{
+    AC = AC || new (window.AudioContext||window.webkitAudioContext)();
+    const t=AC.currentTime+delay, o=AC.createOscillator(), g=AC.createGain();
+    o.type=type;o.frequency.value=freq;g.gain.setValueAtTime(vol,t);g.gain.exponentialRampToValueAtTime(.001,t+dur);
+    o.connect(g).connect(AC.destination);o.start(t);o.stop(t+dur);
+  }catch(e){}
+}
+const sfx={
+  ding:n=>{for(let i=0;i<n;i++)tone(1046,.35,"triangle",.18,i*.32)},
+  buzz:()=>tone(110,.6,"sawtooth",.12),
+  tick:()=>tone(1800,.03,"square",.04),
+  win:()=>[523,659,784,1046].forEach((f,i)=>tone(f,.35,"triangle",.16,i*.12))
+};
+
+/* ---------- wheel ---------- */
+const cv=$("wheel"), cx=cv.getContext("2d");
+function drawWheel(){
+  const W=cv.width, R=W/2, seg=2*Math.PI/SEGS.length;
+  cx.clearRect(0,0,W,W);
+  SEGS.forEach((v,i)=>{
+    const a0=-Math.PI/2+i*seg, a1=a0+seg;
+    let fill = css(SEG_COLORS[i%SEG_COLORS.length]), ink="#0d1426";
+    if(v==="BANKRUPT"){fill="#0a0a0a";ink="#ffffff"}
+    if(v==="LOSE A TURN"){fill="#f5f1e3";ink="#0d1426"}
+    cx.beginPath();cx.moveTo(R,R);cx.arc(R,R,R-4,a0,a1);cx.closePath();
+    cx.fillStyle=fill;cx.fill();cx.lineWidth=3;cx.strokeStyle="#0a1026";cx.stroke();
+    cx.save();cx.translate(R,R);cx.rotate(a0+seg/2);cx.textAlign="right";cx.textBaseline="middle";cx.fillStyle=ink;
+    if(typeof v==="number"){cx.font="44px "+css("--f-display");cx.fillText(String(v),R-28,2)}
+    else{cx.font="24px "+css("--f-tile");cx.fillText(v,R-24,2)}
+    cx.restore();
+  });
+  // rim bulbs
+  for(let i=0;i<SEGS.length;i++){
+    const a=-Math.PI/2+i*seg;cx.beginPath();cx.arc(R+Math.cos(a)*(R-14),R+Math.sin(a)*(R-14),6,0,2*Math.PI);
+    cx.fillStyle="#fff6cf";cx.fill();
+  }
+}
+function segAt(rot){
+  const seg=360/SEGS.length, r=((rot%360)+360)%360;
+  return Math.floor(((360-r)%360)/seg)%SEGS.length;
+}
+const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+let spinning=false;
+function spin(){
+  if(spinning||S.solved||S.phase!=="spin") return;
+  spinning=true;render();
+  const dur = reduceMotion?700:4600;
+  const target = S.rot + (reduceMotion?360:360*5) + Math.random()*360;
+  cv.style.transition=`transform ${dur}ms cubic-bezier(.12,.62,.08,1)`;
+  cv.style.transform=`rotate(${target}deg)`;
+  // ticks while spinning
+  let last=segAt(S.rot), start=performance.now();
+  const step=()=>{
+    const m=getComputedStyle(cv).transform; if(m&&m!=="none"){
+      const [a,b]=m.slice(7,-1).split(",").map(Number);let deg=Math.atan2(b,a)*180/Math.PI;
+      const s=segAt(deg); if(s!==last){last=s;sfx.tick()}
+    }
+    if(performance.now()-start<dur) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+  setTimeout(()=>{
+    S.rot=target;spinning=false;
+    const v=SEGS[segAt(target)], t=S.teams[S.cur];
+    if(v==="BANKRUPT"){sfx.buzz();t.round=0;S.msg=`<span class="bad">BANKRUPT!</span> ${esc(t.name)} loses this round's points.`;nextTeam(false)}
+    else if(v==="LOSE A TURN"){sfx.buzz();S.msg=`<span class="bad">Lose a turn.</span> ${esc(t.name)} passes.`;nextTeam(false)}
+    else{S.landed=v;S.phase="guess";S.msg=`${esc(t.name)} landed on <b>${v}</b>. Call a consonant.`}
+    render();
+  },dur+60);
+}
+
+/* ---------- board ---------- */
+function layout(answer){
+  const words=answer.split(" "), rows=[];let line="";
+  words.forEach(w=>{ if(!line) line=w; else if((line+" "+w).length<=COLS-2) line+=" "+w; else {rows.push(line);line=w} });
+  if(line) rows.push(line);
+  const grid=Array.from({length:ROWS},()=>Array(COLS).fill(null));
+  const top=Math.floor((ROWS-rows.length)/2);
+  rows.forEach((r,i)=>{const off=Math.floor((COLS-r.length)/2);[...r].forEach((ch,j)=>{grid[top+i][off+j]=ch===" "?null:ch})});
+  return grid;
+}
+function renderBoard(flashLetter){
+  const p=PUZZLES[S.puzzle], g=layout(p.a), b=$("board");b.innerHTML="";
+  let k=0;
+  g.flat().forEach(ch=>{
+    const d=document.createElement("div");d.className="cell";
+    if(ch){
+      d.classList.add("letter");
+      const show = S.solved || !/[A-Z]/.test(ch) || S.used.includes(ch);
+      const sp=document.createElement("span");sp.textContent=ch;d.appendChild(sp);
+      if(show){
+        if(flashLetter && ch===flashLetter){
+          const delay=(k++)*280;d.classList.add("flash");
+          setTimeout(()=>d.classList.add("on"),reduceMotion?0:delay+250);
+          d.style.animationDelay=delay+"ms";
+        } else d.classList.add("on");
+      }
+    }
+    b.appendChild(d);
+  });
+  $("cat").textContent=p.cat;
+  $("src").textContent="Puzzle #"+(S.puzzle+1)+" · "+p.src;
+  $("hint").hidden=!S.hint;
+  $("hint").textContent="Clue: "+p.hint;
+  $("hintBtn").textContent=S.hint?"Hide clue":"Show clue";
+}
+
+/* ---------- keys ---------- */
+function renderKeys(){
+  const k=$("keys");k.innerHTML="";
+  const p=PUZZLES[S.puzzle].a, t=S.teams[S.cur];
+  for(const ch of "ABCDEFGHIJKLMNOPQRSTUVWXYZ"){
+    const v=VOWELS.includes(ch), b=document.createElement("button");
+    b.type="button";b.className="key"+(v?" vowel":"");b.dataset.l=ch;
+    b.innerHTML=ch+(v?`<small>${VOWEL_COST}</small>`:"");
+    const used=S.used.includes(ch);
+    if(used) b.classList.add(p.includes(ch)?"hit":"miss");
+    let ok=!used && !S.solved && !spinning;
+    if(ok) ok = v ? (S.phase==="spin" && t.round>=VOWEL_COST) : S.phase==="guess";
+    b.disabled=!ok;
+    b.setAttribute("aria-label",v?`Buy vowel ${ch}`:`Call ${ch}`);
+    b.addEventListener("click",()=>guess(ch));
+    k.appendChild(b);
+  }
+}
+function guess(ch){
+  if(S.used.includes(ch)||S.solved||spinning) return;
+  const v=VOWELS.includes(ch), t=S.teams[S.cur], p=PUZZLES[S.puzzle].a;
+  if(v){ if(S.phase!=="spin"||t.round<VOWEL_COST) return; t.round-=VOWEL_COST }
+  else if(S.phase!=="guess") return;
+  S.used.push(ch);
+  const n=[...p].filter(c=>c===ch).length;
+  if(n){
+    sfx.ding(Math.min(n,4));
+    if(!v) t.round+=n*S.landed;
+    S.msg = v ? `${n} × ${ch}. ${esc(t.name)} keeps control. Spin, buy a vowel or solve.`
+              : `${n} × ${ch} for <b>${n*S.landed}</b>. Spin again, buy a vowel or solve.`;
+    S.phase="spin";S.landed=null;
+    render(ch);
+    if(allRevealed()) S.msg += " Every letter is up. Solve it!", render();
+  } else {
+    sfx.buzz();
+    S.msg=`<span class="bad">No ${ch}.</span>`;
+    nextTeam(false);render();
+  }
+}
+function allRevealed(){return [...PUZZLES[S.puzzle].a].filter(c=>/[A-Z]/.test(c)).every(c=>S.used.includes(c))}
+
+/* ---------- turns ---------- */
+function nextTeam(doRender=true){
+  S.cur=(S.cur+1)%S.teams.length;S.phase="spin";S.landed=null;
+  S.msg=(S.msg?S.msg+" ":"")+`<b>${esc(S.teams[S.cur].name)}</b>, your spin.`;
+  if(doRender) render();
+}
+function renderTeams(){
+  const box=$("teams");box.innerHTML="";
+  S.teams.forEach((t,i)=>{
+    const b=document.createElement("button");b.type="button";b.className="team"+(i===S.cur?" cur":"");
+    b.innerHTML=`${i===S.cur?'<span class="tag">Your turn</span>':""}<span class="nm">${esc(t.name)}</span><span class="tot">${t.total.toLocaleString()}</span><span class="rnd">This round: <b>${t.round.toLocaleString()}</b></span>`;
+    b.title="Make this team the current player";
+    b.addEventListener("click",()=>{if(spinning)return;S.cur=i;S.phase="spin";S.landed=null;S.msg=`<b>${esc(t.name)}</b>, your spin.`;render()});
+    box.appendChild(b);
+  });
+  const h=$("hostTeams");
+  if(h.childElementCount!==S.teams.length){
+    h.innerHTML="";
+    S.teams.forEach((t,i)=>{
+      const row=document.createElement("div");row.className="host-team";
+      row.innerHTML=`<input id="tn${i}" aria-label="Team ${i+1} name" value="${esc(t.name)}"><button class="mini" type="button" data-d="-100">−100</button><button class="mini" type="button" data-d="100">+100</button>`;
+      row.querySelector("input").addEventListener("input",e=>{S.teams[i].name=e.target.value||("Team "+(i+1));renderTeams();save()});
+      row.querySelectorAll(".mini").forEach(m=>m.addEventListener("click",()=>{S.teams[i].total=Math.max(0,S.teams[i].total+Number(m.dataset.d));renderTeams();save()}));
+      h.appendChild(row);
+    });
+  }
+}
+function renderCats(){
+  const c=$("cats");if(c.childElementCount) return;
+  CATS.forEach((cat,i)=>{
+    const l=document.createElement("label");
+    l.innerHTML=`<input type="checkbox" id="cat${i}" ${S.cats.includes(cat)?"checked":""}> ${esc(cat)}`;
+    l.querySelector("input").addEventListener("change",e=>{
+      S.cats = e.target.checked ? [...new Set([...S.cats,cat])] : S.cats.filter(x=>x!==cat);
+      save();
+    });
+    c.appendChild(l);
+  });
+}
+
+/* ---------- solving ---------- */
+function openDialog(html){$("dialog").innerHTML=html;$("overlay").hidden=false;const f=$("dialog").querySelector("button");f&&f.focus()}
+function closeDialog(){$("overlay").hidden=true}
+function askSolve(){
+  if(S.solved||spinning) return;
+  const t=S.teams[S.cur], p=PUZZLES[S.puzzle];
+  openDialog(`<h2>${esc(t.name)} is solving</h2>
+    <p>The team says the full answer aloud. Was it right?</p>
+    <p class="muted">${S.used.length} letters called so far. "Correct" reveals the whole board.</p>
+    <div class="row"><button class="btn solve" id="dCorrect" type="button">Correct</button><button class="btn warn" id="dWrong" type="button">Wrong, next team</button><button class="btn" id="dCancel" type="button">Cancel</button></div>`);
+  $("dCorrect").onclick=()=>solved();
+  $("dWrong").onclick=()=>{closeDialog();sfx.buzz();S.msg=`<span class="bad">Not quite.</span>`;nextTeam()};
+  $("dCancel").onclick=closeDialog;
+}
+function solved(){
+  const t=S.teams[S.cur], p=PUZZLES[S.puzzle], won=Math.max(t.round,SOLVE_MIN);
+  t.total+=won;S.teams.forEach(x=>x.round=0);S.solved=true;S.done.push(S.puzzle);S.phase="spin";
+  sfx.win();
+  S.msg=`<b>${esc(t.name)}</b> solves it and banks <b>${won}</b>.`;
+  render();
+  openDialog(`<h2>Solved: ${esc(p.a)}</h2>
+    <p>Bonus round for ${esc(t.name)}: explain it in one line and give an example from a tutorial, a team presentation or real life.</p>
+    <p class="muted">${esc(p.src)} · Clue: ${esc(p.hint)}</p>
+    <div class="row"><button class="btn solve" id="dBonus" type="button">Award +${EXPLAIN_BONUS}</button><button class="btn" id="dNo" type="button">No bonus</button></div>`);
+  const fin=()=>{closeDialog();nextTeam()};
+  $("dBonus").onclick=()=>{t.total+=EXPLAIN_BONUS;sfx.ding(2);S.msg=`<b>${esc(t.name)}</b> earns the +${EXPLAIN_BONUS} explain bonus.`;fin()};
+  $("dNo").onclick=fin;
+}
+function newPuzzle(){
+  const pool=PUZZLES.map((p,i)=>i).filter(i=>S.cats.includes(PUZZLES[i].cat));
+  if(!pool.length){S.msg="Tick at least one area in Host controls.";render();return}
+  let fresh=pool.filter(i=>!S.done.includes(i)&&i!==S.puzzle);
+  if(!fresh.length){fresh=pool.filter(i=>i!==S.puzzle);if(!fresh.length)fresh=pool}
+  S.puzzle=fresh[Math.floor(Math.random()*fresh.length)];
+  S.used=[];S.solved=false;S.hint=false;S.phase="spin";S.landed=null;S.teams.forEach(t=>t.round=0);
+  S.msg=`New puzzle: <b>${esc(PUZZLES[S.puzzle].cat)}</b>. ${esc(S.teams[S.cur].name)}, spin.`;
+  render();
+}
+
+/* ---------- render ---------- */
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function render(flash){
+  renderBoard(flash);renderKeys();renderTeams();renderCats();
+  $("status").innerHTML=S.msg||`<b>${esc(S.teams[S.cur].name)}</b>, spin the wheel.`;
+  const canSpin=!spinning&&!S.solved&&S.phase==="spin";
+  $("spinBtn").disabled=!canSpin;$("hubBtn").disabled=!canSpin;
+  $("solveBtn").disabled=S.solved||spinning;
+  $("passBtn").disabled=S.solved||spinning;
+  $("soundBtn").textContent="Sound: "+(S.sound?"on":"off");
+  save();
+}
+const isKey=()=>true;
+function renderKey(cur){
+  $("keyList").innerHTML=PUZZLES.map((p,i)=>`<li class="${i===cur?"now":""}"><span class="n">${i+1}</span><div><div class="a">${esc(p.a)}</div><div class="d">${esc(p.def)}</div><div class="m"><b>Where:</b> ${esc(p.loc)}</div><div class="m">${esc(p.cat)} · Clue shown to class: ${esc(p.hint)}</div></div></li>`).join("");
+  const l=$("keyLive");l.hidden=cur==null;
+  if(cur!=null) l.textContent=`On the board now: #${cur+1} ${PUZZLES[cur].a}`;
+}
+function route(){
+  $("game").hidden=isKey();$("keyView").hidden=!isKey();
+  if(isKey()) renderKey(null);
+}
+window.addEventListener("hashchange",route);
+window.addEventListener("storage",e=>{
+  if(!isKey()||e.key!=="ab1501wheel"||!e.newValue) return;
+  try{const s=JSON.parse(e.newValue);if(PUZZLES[s.puzzle])renderKey(s.puzzle)}catch(err){}
+});
+function save(){if(isKey())return;try{localStorage.setItem("ab1501wheel",JSON.stringify(S))}catch(e){}}
+
+/* ---------- wiring ---------- */
+$("spinBtn").onclick=spin;$("hubBtn").onclick=spin;
+$("solveBtn").onclick=askSolve;
+$("passBtn").onclick=()=>{S.msg="";nextTeam()};
+$("newBtn").onclick=newPuzzle;
+$("hintBtn").onclick=()=>{S.hint=!S.hint;render()};
+$("soundBtn").onclick=()=>{S.sound=!S.sound;render()};
+$("backBtn").onclick=()=>{location.href="./"};
+$("revealBtn").onclick=()=>{S.solved=true;if(!S.done.includes(S.puzzle))S.done.push(S.puzzle);S.teams.forEach(t=>t.round=0);S.msg="Answer revealed. No points awarded.";render()};
+$("resetBtn").onclick=()=>openDialog(`<h2>Reset all scores?</h2><p>Team names stay. Totals and round points go back to zero.</p><div class="row"><button class="btn warn" id="dYes" type="button">Reset scores</button><button class="btn" id="dNo2" type="button">Cancel</button></div>`)
+  ||($("dYes").onclick=()=>{S.teams.forEach(t=>{t.total=0;t.round=0});S.cur=0;S.msg="Scores reset.";closeDialog();render()},$("dNo2").onclick=closeDialog);
+$("rulesBtn").onclick=()=>openDialog(`<h2>How to play</h2>
+  <ol class="rules">
+    <li>The team in yellow spins. Land on a number, then call a consonant. Each time it appears, you earn that many points.</li>
+    <li>A correct letter keeps your turn: spin again, buy a vowel for ${VOWEL_COST} pts, or solve.</li>
+    <li>A wrong letter, Bankrupt or Lose a Turn passes play. Bankrupt also wipes your points for this round.</li>
+    <li>Solve correctly to bank your round points (at least ${SOLVE_MIN}). Other teams' round points are lost.</li>
+    <li>Explain bonus: the solving team defines the term and gives an example for +${EXPLAIN_BONUS}.</li>
+    <li>Keyboard: letters to guess, Space to spin, Enter to solve.</li>
+  </ol>
+  <div class="row"><button class="btn solve" id="dOk" type="button">Got it</button></div>`)||($("dOk").onclick=closeDialog);
+$("overlay").addEventListener("click",e=>{if(e.target.id==="overlay")closeDialog()});
+document.addEventListener("keydown",e=>{
+  if(e.target.tagName==="INPUT"||isKey()) return;
+  if(!$("overlay").hidden){if(e.key==="Escape")closeDialog();return}
+  if(e.key===" "){e.preventDefault();spin()}
+  else if(e.key==="Enter"){e.preventDefault();askSolve()}
+  else if(/^[a-z]$/i.test(e.key)){const b=document.querySelector(`.key[data-l="${e.key.toUpperCase()}"]`);if(b&&!b.disabled)guess(e.key.toUpperCase())}
+});
+
+function start(data){
+  S = data && data.teams ? data : null;
+  if(!S){try{const s=JSON.parse(localStorage.getItem("ab1501wheel"));if(s&&s.teams&&s.teams.length===5&&PUZZLES[s.puzzle])S=s}catch(e){}}
+  if(!S){S=freshState();S.puzzle=Math.floor(Math.random()*PUZZLES.length);S.msg=`<b>Team 1</b>, spin the wheel to start.`}
+  S.phase = S.phase==="guess" && S.landed ? "guess" : "spin";
+  cv.style.transition="none";cv.style.transform=`rotate(${S.rot}deg)`;
+  route();
+  drawWheel();
+  (document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(drawWheel);
+  render();
+}
+window.claude?.hot?.snapshot?.(()=>S);
+window.claude?.hot?.ready ? window.claude.hot.ready(start) : start(window.claude?.hot?.data ?? {});
+</script>
+
+</body>
+</html>
