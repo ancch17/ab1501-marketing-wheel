@@ -108,9 +108,11 @@ h1 span{color:var(--bulb)}
 details.host{border:1px solid var(--line);border-radius:12px;padding:10px 14px;background:rgba(20,36,76,.5)}
 details.host summary{cursor:pointer;font-weight:700}
 .host-grid{display:grid;gap:14px;margin-top:12px}
-.host-teams{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.host-teams{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
 .host-team{display:flex;gap:6px;align-items:center;min-width:0}
-.host-team input{flex:1;min-width:0;background:#0a1026;border:1px solid var(--line);border-radius:8px;color:var(--text);padding:7px 9px;font:inherit}
+.inout{display:flex;align-items:center;gap:4px;font-size:12px;font-weight:700;white-space:nowrap;cursor:pointer}
+.team.out{opacity:.38;border-style:dashed;cursor:not-allowed}
+.host-team input[type=text]{flex:1;min-width:0;background:#0a1026;border:1px solid var(--line);border-radius:8px;color:var(--text);padding:7px 9px;font:inherit}
 .mini{border:1px solid var(--line);background:#0a1026;border-radius:7px;padding:6px 8px;font-size:12px;font-weight:700}
 .cats{display:flex;gap:8px;flex-wrap:wrap}
 .cats label{display:flex;gap:6px;align-items:center;font-size:13px;border:1px solid var(--line);border-radius:999px;padding:5px 11px;cursor:pointer}
@@ -403,16 +405,18 @@ function allRevealed(){return [...PUZZLES[S.puzzle].a].filter(c=>/[A-Z]/.test(c)
 
 /* ---------- turns ---------- */
 function nextTeam(doRender=true){
-  S.cur=(S.cur+1)%S.teams.length;S.phase="spin";S.landed=null;
+  const n=S.teams.length;let i=S.cur;for(let k=0;k<n;k++){i=(i+1)%n;if(!S.teams[i].out)break}
+  S.cur=i;S.phase="spin";S.landed=null;
   S.msg=(S.msg?S.msg+" ":"")+`<b>${esc(S.teams[S.cur].name)}</b>, your spin.`;
   if(doRender) render();
 }
 function renderTeams(){
   const box=$("teams");box.innerHTML="";
   S.teams.forEach((t,i)=>{
-    const b=document.createElement("button");b.type="button";b.className="team"+(i===S.cur?" cur":"");
-    b.innerHTML=`${i===S.cur?'<span class="tag">Your turn</span>':""}<span class="nm">${esc(t.name)}</span><span class="tot">${t.total.toLocaleString()}</span><span class="rnd">This round: <b>${t.round.toLocaleString()}</b></span>`;
-    b.title="Make this team the current player";
+    const b=document.createElement("button");b.type="button";b.className="team"+(i===S.cur&&!t.out?" cur":"")+(t.out?" out":"");
+    b.innerHTML=`${i===S.cur&&!t.out?'<span class="tag">Your turn</span>':""}<span class="nm">${esc(t.name)}</span><span class="tot">${t.total.toLocaleString()}</span><span class="rnd">${t.out?"Sitting out":`This round: <b>${t.round.toLocaleString()}</b>`}</span>`;
+    b.disabled=!!t.out;
+    b.title=t.out?"Sitting out. Switch back on in Host controls":"Make this team the current player";
     b.addEventListener("click",()=>{if(spinning)return;S.cur=i;S.phase="spin";S.landed=null;S.msg=`<b>${esc(t.name)}</b>, your spin.`;render()});
     box.appendChild(b);
   });
@@ -421,8 +425,18 @@ function renderTeams(){
     h.innerHTML="";
     S.teams.forEach((t,i)=>{
       const row=document.createElement("div");row.className="host-team";
-      row.innerHTML=`<input id="tn${i}" aria-label="Team ${i+1} name" value="${esc(t.name)}"><button class="mini" type="button" data-d="-100">−100</button><button class="mini" type="button" data-d="100">+100</button>`;
-      row.querySelector("input").addEventListener("input",e=>{S.teams[i].name=e.target.value||("Team "+(i+1));renderTeams();save()});
+      row.innerHTML=`<label class="inout" title="Untick to sit this team out"><input type="checkbox" id="tin${i}" ${t.out?"":"checked"}> In</label><input type="text" id="tn${i}" aria-label="Team ${i+1} name" value="${esc(t.name)}"><button class="mini" type="button" data-d="-100">−100</button><button class="mini" type="button" data-d="100">+100</button>`;
+      row.querySelector("#tin"+i).addEventListener("change",e=>{
+        if(spinning){e.target.checked=!S.teams[i].out;return}
+        const tm=S.teams[i];
+        if(!e.target.checked){
+          if(S.teams.filter(x=>!x.out).length<=1){e.target.checked=true;S.msg="At least one team must stay in the game.";render();return}
+          tm.out=true;tm.round=0;S.msg=`${esc(tm.name)} is sitting out.`;
+          if(S.cur===i){nextTeam();return}
+        } else {tm.out=false;S.msg=`${esc(tm.name)} is back in the game.`}
+        render();
+      });
+      row.querySelector("#tn"+i).addEventListener("input",e=>{S.teams[i].name=e.target.value||("Team "+(i+1));renderTeams();save()});
       row.querySelectorAll(".mini").forEach(m=>m.addEventListener("click",()=>{S.teams[i].total=Math.max(0,S.teams[i].total+Number(m.dataset.d));renderTeams();save()}));
       h.appendChild(row);
     });
@@ -519,7 +533,7 @@ $("soundBtn").onclick=()=>{S.sound=!S.sound;render()};
 $("backBtn").onclick=()=>{location.hash=""};
 $("revealBtn").onclick=()=>{S.solved=true;if(!S.done.includes(S.puzzle))S.done.push(S.puzzle);S.teams.forEach(t=>t.round=0);S.msg="Answer revealed. No points awarded.";render()};
 $("resetBtn").onclick=()=>openDialog(`<h2>Reset all scores?</h2><p>Team names stay. Totals and round points go back to zero.</p><div class="row"><button class="btn warn" id="dYes" type="button">Reset scores</button><button class="btn" id="dNo2" type="button">Cancel</button></div>`)
-  ||($("dYes").onclick=()=>{S.teams.forEach(t=>{t.total=0;t.round=0});S.cur=0;S.msg="Scores reset.";closeDialog();render()},$("dNo2").onclick=closeDialog);
+  ||($("dYes").onclick=()=>{S.teams.forEach(t=>{t.total=0;t.round=0});S.cur=Math.max(0,S.teams.findIndex(t=>!t.out));S.msg="Scores reset.";closeDialog();render()},$("dNo2").onclick=closeDialog);
 $("rulesBtn").onclick=()=>openDialog(`<h2>How to play</h2>
   <ol class="rules">
     <li>The team in yellow spins. Land on a number, then call a consonant. Each time it appears, you earn that many points.</li>
